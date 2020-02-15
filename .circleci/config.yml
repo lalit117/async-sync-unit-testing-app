@@ -45,7 +45,8 @@ jobs:
           name: Publish Docker Image to Docker Hub
           command: |
               echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-              docker push $IMAGE_NAME:latest
+              docker tag $IMAGE_NAME $DOCKERHUB_USERNAME/$IMAGE_NAME
+              docker push $DOCKERHUB_USERNAME/$IMAGE_NAME:latest
 workflows:
   version: 2
   test-and-build-image:
